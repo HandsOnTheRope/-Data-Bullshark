@@ -1,0 +1,9 @@
+#linear regression
+plot(FICO.Score, Interest.Rate.Clean, main="Scatterplot")
+abline(lm(Interest.Rate.Clean~FICO.Score))
+mod1 <- lm(Interest.Rate.Clean ~ FICO.Score + Amount.Requested + Loan.Length.Clean)
+summary(mod1)
+
+#logistic regression
+loansData_clean$high.interest.rate <- ifelse(loansData_clean$Interest.Rate.Clean >= .12, 1, 0) 
+mod3 <- glm(high.interest.rate ~ FICO.Score + Amount.Requested + Loan.Length.Clean, data = loansData_clean)
