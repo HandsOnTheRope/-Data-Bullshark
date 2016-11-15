@@ -1,11 +1,14 @@
-#[IRS OCA] R-Training
-#Cindy Zheng
+#R-Training
+#Cindy
 #11/9/16
 
 #Sections:
   # 1.Loading the data
   # 2.Linear regressions
   # 3.Logistic regressions
+  # 4.New variable
+  # 5.Creating data frames
+  # 6.Histograms of data frames
 
 ############# LOADING THE DATA ############# 
 
@@ -215,4 +218,26 @@
     # DOESN'T WORK
     
     
-  
+############# New Variable ############# 
+#Create new variable in dataframe for the amount of interest paid on loan (simple interest) 
+#Assuming simple interest = Amount.Funded.By.Investors*Interest.Rate.Clean*Loan.Length.Clean
+    names(loan.data)  #Seeing all the variable names
+    attach(loan.data) #indicate which dataset to reference
+    loan.data$Interest.Paid <- Amount.Funded.By.Investors*Interest.Rate.Clean*Loan.Length.Clean
+    detach(loan.data)
+    
+############# Creating Data Frames #############     
+#Create 3 new data frames by interest rate: 1) 5%-10%, 2) 10%-15%, 3) >15%
+    low.interest.data <- loan.data[loan.data$Interest.Rate.Clean<.1, ]
+    med.interest.data <- loan.data[loan.data$Interest.Rate.Clean<.15 & loan.data$Interest.Rate.Clean >= .1, ]
+    high.interest.data <- loan.data[loan.data$Interest.Rate.Clean>=.15, ]
+    
+############# Histograms of Data Frames #############
+#Create histograms for amount of interest paid
+    hist(low.interest.data$Interest.Paid)
+    hist(med.interest.data$Interest.Paid)
+    hist(high.interest.data$Interest.Paid)
+    
+    
+    
+    
